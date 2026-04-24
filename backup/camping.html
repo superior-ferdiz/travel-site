@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="css/styles.css">
+
+
+  <meta name="description" content="Explore hiking, skiing, and camping in Bø, Telemark.">
+  <meta property="og:title" content="Telemark Adventures">
+  <meta property="og:description" content="Trails, slopes, lakes—plan your trip.">
+  <meta property="og:image" content="images/slide1.jpg">
+  <meta name="theme-color" content="#0ea5e9">
+
+  
+  <title>Camping — Telemark Adventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="images/favicon.png">
+
+</head>
+<body class="is-hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">Telemark<span>Adventures</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="hiking.html">Hiking</a>
+        <a href="skiing.html">Skiing</a>
+        <a href="camping.html">Camping</a>
+        <a href="events.html">Events</a>
+        <a href="food.html">Dining</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero parallax hero-camping" data-parallax-speed="0.25"
+    style="--bg-image:url('images/camping.jpg'); background-image:url('images/camping.jpg'); background-size:cover; background-position:center;">
+    <div class="hero-inner">
+      <h1>Camping in Telemark</h1>
+      <p>Lakeside evenings and starry skies.</p>
+    </div>
+  </section>
+
+  <main class="section">
+    <!-- Campsite Finder -->
+    <section id="camps" class="section">
+      <div class="container">
+        <h2>Campsite finder (Bø i Telemark)</h2>
+
+        <form id="camp-filters" class="camp-filters" aria-label="Filter campsites">
+          <div class="row">
+            <label>
+              Feature
+              <select name="feature">
+                <option value="">Any</option>
+                <option value="family">Family-friendly</option>
+                <option value="river">By river/lake</option>
+                <option value="sommarland">Near Bø Sommarland</option>
+                <option value="open-year">Open all year</option>
+                <option value="cabins">Cabins/pods</option>
+              </select>
+            </label>
+
+            <label>
+              Sort by
+              <select name="sort">
+                <option value="rank">Recommended</option>
+                <option value="distance">Closest to sentrum</option>
+              </select>
+            </label>
+
+            <button type="button" id="campClear" class="btn btn-ghost">Clear</button>
+          </div>
+        </form>
+
+        <div id="camp-list" class="camp-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Wild camping & campfire rules (Norway) -->
+    <section id="wild" class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>Wild camping (allemannsretten)</h2>
+          <ul class="checklist">
+            <li><strong>Pitch 150 m+</strong> from the nearest inhabited house/cabin.</li>
+            <li><strong>Max 2 nights</strong> in the same spot (longer in high mountains/remote areas).</li>
+            <li>Stay off cultivated land; leave no trace; respect grazing and nesting.</li>
+          </ul>
+          <p class="caption">Rules shown here are summaries; always follow local signs and guidance.</p>
+        </div>
+
+        <div>
+          <h2>Campfire & stove safety</h2>
+          <ul class="checklist">
+            <li><strong>General ban 15 Apr–15 Sep</strong> on open fires in/near forest & uncultivated land.</li>
+            <li>Outside that period: only when <em>safe</em> (no wind / drought; clear to mineral soil).</li>
+            <li>Disposable grills count as fires; use official fire sites when available.</li>
+          </ul>
+          <p class="caption">Check local municipal notices before lighting any fire.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stays" class="section">
+      <div class="container">
+        <h2>Where to stay (hotels & lodges)</h2>
+
+        <div class="camp-list">
+          <!-- Bø Hotell -->
+          <article class="camp-card">
+            <img src="images/bohotell.jpg" alt="Bø Hotell">
+            <div class="body">
+              <h3>Bø Hotell</h3>
+              <p>Central hotel near sentrum; good base for Sommarland, hiking and the canal.</p>
+              <div class="badges"><span class="badge">Family-friendly</span><span class="badge">In town</span></div>
+
+              <details class="more">
+                <summary>Details & map</summary>
+                <div class="info-grid">
+                  <div>Address: Gullbringvegen 32</div>
+                  <div>Season: All year</div>
+                  <div>Phone: +47 35 06 08 00</div>
+                  <div>Walkable to sentrum</div>
+                </div>
+                <!-- Bø Hotell 59.411428, 9.061928 -->
+                <iframe
+                  title="Map – Bø Hotell"
+                  loading="lazy"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=9.051928%2C59.401428%2C9.071928%2C59.421428&layer=mapnik&marker=59.411428%2C9.061928">
+                </iframe>
+                <p class="caption">Map centers Bø Hotell; zoom for detail.</p>
+              </details>
+            </div>
+          </article>
+
+          <!-- Lifjellstua -->
+          <article class="camp-card">
+            <img src="images/lifjellstua.png" alt="Lifjellstua mountain lodge">
+            <div class="body">
+              <h3>Lifjellstua (mountain lodge)</h3>
+              <p>Cozy fjellstue on Lifjell plateau — trails and ski area right outside.</p>
+              <div class="badges"><span class="badge">Highland</span><span class="badge">Restaurant</span></div>
+
+              <details class="more">
+                <summary>Details & map</summary>
+                <div class="info-grid">
+                  <div>Address: Lifjellvegen 934</div>
+                  <div>Season: All year</div>
+                  <div>Phone: +47 35 95 33 80</div>
+                  <div>Near Lifjell Skisenter</div>
+                </div>
+                <!-- Lifjellstua ~59.476886, 9.007772 -->
+                <iframe
+                  title="Map – Lifjellstua"
+                  loading="lazy"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=8.987772%2C59.456886%2C9.027772%2C59.496886&layer=mapnik&marker=59.476886%2C9.007772">
+                </iframe>
+                <p class="caption">Map centers Lifjellstua; zoom for detail.</p>
+              </details>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Maybe useless area map -->
+    <section id="camp-map" class="section">
+      <div class="container">
+        <h2>Area map</h2>
+        <div class="map-wrap">
+          <iframe
+            title="Bø i Telemark area"
+            width="100%" height="380" loading="lazy"
+            style="border:0; border-radius:16px"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=9.00%2C59.40%2C9.10%2C59.46&layer=mapnik">
+          </iframe>
+          <p class="caption">Zoom and pan. Each campsite card below also includes its own mini-map.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <h2>Tips for a great night out</h2>
+      <ol>
+        <li>Pick a sheltered spot and respect local guidelines.</li>
+        <li>Bring layers, headlamp, and a reliable sleeping bag.</li>
+        <li>Leave no trace — pack out everything you bring.</li>
+      </ol>
+    </div>
+
+    <section id="gear" class="section">
+      <div class="container">
+        <h2>Gear checklist</h2>
+        <p class="caption">Tick what you need. Your choices are saved on this device. Use “Print checklist” for a one-page printout.</p>
+
+        <div class="gear">
+          <div class="gear-col">
+            <h3>Camping</h3>
+            <ul>
+              <li><label><input type="checkbox" data-key="tent"> Tent / poles / pegs</label></li>
+              <li><label><input type="checkbox" data-key="sleeping-bag"> Sleeping bag (season-rated)</label></li>
+              <li><label><input type="checkbox" data-key="mat"> Sleeping mat</label></li>
+              <li><label><input type="checkbox" data-key="stove"> Stove + fuel (fire rules apply)</label></li>
+              <li><label><input type="checkbox" data-key="cook"> Pot / mug / cutlery</label></li>
+              <li><label><input type="checkbox" data-key="headlamp"> Headlamp + batteries</label></li>
+              <li><label><input type="checkbox" data-key="powerbank"> Power bank</label></li>
+            </ul>
+          </div>
+
+          <div class="gear-col">
+            <h3>Clothing</h3>
+            <ul>
+              <li><label><input type="checkbox" data-key="base"> Base layer (wool/synthetic)</label></li>
+              <li><label><input type="checkbox" data-key="mid"> Mid layer (fleece/wool)</label></li>
+              <li><label><input type="checkbox" data-key="shell"> Rain shell</label></li>
+              <li><label><input type="checkbox" data-key="hat"> Warm hat / buff</label></li>
+              <li><label><input type="checkbox" data-key="gloves"> Gloves</label></li>
+              <li><label><input type="checkbox" data-key="socks"> Extra socks</label></li>
+            </ul>
+          </div>
+
+          <div class="gear-col">
+            <h3>Hiking & safety</h3>
+            <ul>
+              <li><label><input type="checkbox" data-key="map"> Map / offline GPS</label></li>
+              <li><label><input type="checkbox" data-key="firstaid"> First-aid & blister kit</label></li>
+              <li><label><input type="checkbox" data-key="water"> Water bottles / filter</label></li>
+              <li><label><input type="checkbox" data-key="food"> Snacks / meals</label></li>
+              <li><label><input type="checkbox" data-key="sunscreen"> Sunscreen / sunglasses</label></li>
+              <li><label><input type="checkbox" data-key="bags"> Trash & zip bags</label></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="gear-actions">
+          <button id="gearPrint" class="btn">🖨️ Print checklist</button>
+          <button id="gearClear" class="btn btn-ghost">Clear ticks</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Telemark Adventures.</p>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+  <script src="js/camps.js"></script>
+  <script src="js/gear.js"></script>
+</body>
+</html>

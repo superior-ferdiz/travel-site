@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <meta name="description" content="Explore hiking, skiing, and camping in Bø, Telemark.">
+  <meta property="og:title" content="Telemark Adventures">
+  <meta property="og:description" content="Trails, slopes, lakes—plan your trip.">
+  <meta property="og:image" content="images/slide1.jpg">
+  <meta name="theme-color" content="#0ea5e9">
+
+
+  <title>Skiing — Telemark Adventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="images/favicon.png">
+
+</head>
+<body class="is-hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">Telemark<span>Adventures</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="hiking.html">Hiking</a>
+        <a href="skiing.html">Skiing</a>
+        <a href="camping.html">Camping</a>
+        <a href="events.html">Events</a>
+        <a href="food.html">Dining</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero parallax hero-skiing" data-parallax-speed="0.3"
+    style="--bg-image:url('images/skiing.jpg'); background-image:url('images/skiing.jpg'); background-size:cover; background-position:center;">
+    <div class="hero-inner">
+      <h1>Skiing in Telemark</h1>
+      <p>Alpine slopes and endless cross‑country tracks.</p>
+    </div>
+  </section>
+
+  <main class="section">
+    <!-- Snow & Weather -->
+    <section id="snow" class="section">
+      <div class="container">
+        <h2>Snow & weather (Lifjell)</h2>
+
+        <div class="wx wx--ski">
+          <!-- Reuse the same weather widget component -->
+          <div id="weather-widget"
+              data-lat="59.478"
+              data-lon="9.010"
+              data-timezone="Europe/Oslo"></div>
+
+          <!-- New compact snow widget -->
+          <div id="snow-widget"
+              data-lat="59.478"
+              data-lon="9.010"
+              data-timezone="Europe/Oslo"></div>
+        </div>
+
+        <p class="caption">Snowfall is a forecast. Trail grooming varies by day and conditions.</p>
+      </div>
+    </section>
+
+    <!-- Ski Areas -->
+    <section id="areas" class="section">
+      <div class="container">
+        <h2>Ski areas (Bø & Lifjell)</h2>
+
+        <div class="camp-list">
+          <!-- Lifjell Skisenter (Alpine) -->
+          <article class="camp-card">
+            <img src="images/lifjellskisenter.jpg" alt="Lifjell Skisenter">
+            <div class="body">
+              <h3>Lifjell Skisenter (Alpine)</h3>
+              <div class="badges"><span class="badge">Alpine</span><span class="badge">Family</span></div>
+
+              <p>Local alpine area with beginner to intermediate slopes. Rental & café typically on site.</p>
+
+              <details class="more">
+                <summary>Details & map</summary>
+                <div class="info-grid">
+                  <div>Base: ~750–800 m</div>
+                  <div>Style: Family alpine</div>
+                  <div>Closest town: Bø</div>
+                  <div>Parking: By the lifts</div>
+                </div>
+                <!-- ~59.478, 9.010 -->
+                <iframe
+                  loading="lazy"
+                  title="Map – Lifjell Skisenter"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=8.990%2C59.458%2C9.030%2C59.498&layer=mapnik&marker=59.478%2C9.010">
+                </iframe>
+                <p class="caption">Map centers the alpine area. Zoom for detail.</p>
+              </details>
+            </div>
+          </article>
+
+
+          <!-- Jønnbu XC loops (Cross-country) -->
+          <article class="camp-card">
+            <img src="images/jønnbuski.jpg" alt="Lifjell cross-country terrain near Jønnbu">
+            <div class="body">
+              <h3>Jønnbu XC loops (Lifjell)</h3>
+              <div class="badges"><span class="badge">Cross-country</span><span class="badge">Family</span></div>
+
+              <p>Marked XC terrain from the Jønnbu side. Grooming depends on weather and volunteer schedules.</p>
+
+              <details class="more">
+                <summary>Details & map</summary>
+                <div class="info-grid">
+                  <div>Start: Jønnbu</div>
+                  <div>Styles: Classic / Skating</div>
+                  <div>Terrain: Rolling highland</div>
+                  <div>Best: Cold, settled conditions</div>
+                </div>
+                <!-- ~59.478, 9.002 -->
+                <iframe
+                  loading="lazy"
+                  title="Map – Jønnbu XC"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=8.982%2C59.458%2C9.022%2C59.498&layer=mapnik&marker=59.478%2C9.002">
+                </iframe>
+                <p class="caption">Map centers the Jønnbu area.</p>
+              </details>
+            </div>
+          </article>
+
+
+          <!-- Lowland tracks (when groomed) -->
+          <article class="camp-card">
+            <img src="images/folkestadaaseneski.png" alt="Lowland forest tracks near Bø">
+            <div class="body">
+              <h3>Lowland tracks (Folkestadåsane)</h3>
+              <div class="badges"><span class="badge">Cross-country</span><span class="badge">Forest</span></div>
+              <p>Gentle tracks closer to town when there’s enough snow. Great for easy laps.</p>
+
+              <details class="more">
+                <summary>Details & map</summary>
+                <div class="info-grid">
+                  <div>Start: Folkestad area</div>
+                  <div>Terrain: Forest & gentle hills</div>
+                  <div>Best: After fresh lowland snow</div>
+                  <div>Parking: Local pull-outs</div>
+                </div>
+                <!-- ~59.43524, 9.06996 -->
+                <iframe
+                  loading="lazy"
+                  title="Map – Folkestadåsane"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=9.050%2C59.420%2C9.090%2C59.450&layer=mapnik&marker=59.43524%2C9.06996">
+                </iframe>
+                <p class="caption">Map centers the Folkestadåsane area near Bø.</p>
+              </details>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="prices" class="section">
+      <div class="container">
+        <h2>Ski pass prices</h2> <!-- mby api/webscraping? C;-->
+
+        <div class="price-cards">
+          <article class="price-card">
+            <h3>Alpine — Lifjell Skisenter</h3>
+            <table class="price-table">
+              <thead>
+                <tr><th>Product</th><th>Adult</th><th>Youth</th><th>Child/Senior</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Day pass</td><td>kr 420</td><td>kr 360</td><td>kr 320</td></tr>
+                <tr><td>Half-day</td><td>kr 350</td><td>kr 300</td><td>kr 270</td></tr>
+                <tr><td>Evening</td><td>kr 290</td><td>kr 250</td><td>kr 230</td></tr>
+                <tr><td>Helmet rental</td><td colspan="3">kr 70</td></tr>
+              </tbody>
+            </table>
+            <a class="caption" href="https://lifjell.skiperformance.com/no/shopp#/no/support/help" style="text-decoration: none; cursor: pointer; color:rgb(50, 218, 218); font-size:18px;"><b>Buy your tickets here!</b></a>
+          </article>
+
+          <article class="price-card">
+            <h3>Cross-country — Jønnbu / lowland tracks</h3>
+            <p>Tracks are free to use. Consider donating to the local trail orgs when grooming is active.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Rentals & lessons -->
+    <section id="rentals" class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>Rentals & lessons</h2>
+          <ul class="checklist">
+            <li>Alpine: enquire at Lifjell base for skis/boards/helmets.</li>
+            <li>XC: some shops in Bø carry classic/BC gear seasonally.</li>
+            <li>Group lessons: often arranged weekends/holidays at the resort.</li>
+            <li>Respect closures and grooming; keep dogs under control.</li>
+            <li>Tip: reserve during busy school holidays.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Winter safety</h2>
+          <ul class="checklist">
+            <li>Dress in layers; protect fingers, toes, head and face from windchill.</li>
+            <li>Check visibility and wind before choosing routes.</li>
+            <li>Carry a light, map/app with offline coverage, and a small repair kit.</li>
+            <li>If you have a Recco chip feel free to use it.</li>
+            <li>Always bring more food and water than you expect you need.</li>
+            <li>Be careful of snow blindness! Bring sunglasses or similar with color.</li>
+            <a href="https://www.visitnorway.com/plan-your-trip/safety-first/winter-mountain-safety/" style="text-decoration: none; cursor: pointer; color:rgb(50, 218, 218); font-size:18px;"><b><i>For more info visit this site!</i></b></a>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Telemark Adventures.</p>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+  <script src="js/weather.js"></script>
+  <script src="js/snow.js"></script>
+  <script src="js/skiing.js"></script>
+</body>
+</html>

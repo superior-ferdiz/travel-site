@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dining</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/food.css">
+  <link rel="icon" href="images/icons/ta-logo.png">
+</head>
+<body class="is-hidden">
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="Telemark Adventures">
+        <img class="logo-mark" src="images/icons/ta-logo.png" alt="", width="28", height="28" decoding="async">
+        Telemark<span style="color: rgba(54, 188, 247);">Adventures</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="hiking.html">Hiking</a>
+        <a href="skiing.html">Skiing</a>
+        <a href="camping.html">Camping</a>
+        <a href="events.html">Events</a>
+        <a class="is-active" href="food.html">Dining</a>
+        <a href="journey.html">Plan</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">Dark mode</button>
+        <button id="translate-button" class="translate-btn" aria-expanded="false">🌐 Translate</button>
+
+        <!-- Custom popover AI -->
+        <div id="translate-menu" class="translate-menu" hidden>
+          <button class="translate-item" data-lang="en">🇬🇧 English</button>
+          <button class="translate-item" data-lang="no">🇳🇴 Norsk</button>
+          <button class="translate-item" data-lang="de">🇩🇪 Deutsch</button>
+          <button class="translate-item" data-lang="fr">🇫🇷 Français</button>
+          <button class="translate-item" data-lang="es">🇪🇸 Español</button>
+          <button class="translate-item" data-lang="it">🇮🇹 Italiano</button>
+          <button class="translate-item" data-lang="pl">🇵🇱 Polski</button>
+          <button class="translate-item" data-lang="ru">🇷🇺 Русский</button>
+          <button class="translate-item" data-lang="zh-CN">🇨🇳 中文(简体)</button>
+          <button class="translate-item" data-lang="ja">🇯🇵 日本語</button>
+        </div>
+
+        <!-- Keep Google widget mounted but visually removed -->
+        <div id="google_translate_element" class="gt-hidden"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero parallax hero-food" data-parallax-speed="0.25"
+    style="--bg-image:url('images/kaffekanne.jpg'); background-image:url('images/kaffekanne.jpg'); background-repeat:no-repeat; background-size:cover; background-position:center;">
+    <div class="hero-inner">
+      <h1>Food & Drinks</h1>
+      <p class="lead">Eat in and around Bø</p>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <main class="section">
+    <div class="container narrow">
+      <!-- Filters -->
+      <form id="food-filters" class="list-filters" aria-label="Filter places">
+        <input type="search" name="q" placeholder="Search places…" autocomplete="off" />
+        <select name="kind">
+          <option value="">All types</option>
+          <option value="restaurant">Restaurant</option>
+          <option value="pub">Pub</option>
+          <option value="takeaway">Takeaway</option>
+          <option value="cafe">Café</option>
+          <option value="bakery">Bakery</option>
+        </select>
+        <label class="switch">
+          <input type="checkbox" name="open"> <span>Open now</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" name="nearby">
+          <span>Include nearby (≤15 min)</span>
+        </label>
+        <button type="button" id="clearFood" class="btn btn-ghost">Clear</button>
+      </form>
+
+      <!-- List -->
+      <div id="food-list" class="card-list" aria-live="polite"></div>
+    </div>
+
+    <br>
+    <button onclick="topFunction()" id="top-btn" title="Go to top">Top</button>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Telemark Adventures · Ferdinand Risan</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/food.js"></script>
+
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

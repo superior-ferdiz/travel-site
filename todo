@@ -1,0 +1,96 @@
+1. New Image for devider
+2. Add alt-data to carousel
+3. Different Languages English, Norwegian, Deutch, Chinese?
+
+6. Update images to more accurate ones
+7. Check local municipal notices before lighting any fire. make into link
+8. Add link to websites for checking in or campsites etc
+8. Clean up files for duplicates and useless old code
+9. Make some text un-selectable like holo and shit
+10. Folkestaadåsene popular fix image
+11. Klatregruppe - events https://klatregruppa.com/
+
+
+OSI-modellen
+DOM-modellen
+
+For the different logo images
+  <!--link rel="icon" sizes="32x32" href="images/icons/ta-logo-32.png"-->
+  <!--link rel="icon" sizes="192x192" href="images/icons/ta-logo-192.png"-->
+  <!--link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png"-->
+
+
+
+temp
+    <!-- Map -->
+    <div class="container">
+      <div class="map-wrap contact-map">
+        <iframe
+          title="Bø i Telemark"
+          width="100%" height="360" loading="lazy"
+          style="border:0; border-radius:16px"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=9.03%2C59.39%2C9.11%2C59.44&layer=mapnik&marker=59.413%2C9.069">
+        </iframe>
+      </div>
+    </div>
+
+
+
+
+
+
+temp
+/* === Weather widget · unified phone layout (Hiking + Skiing) === */
+@media (max-width: 600px) {
+  /* Contain width per widget (no page-level overflow hacks) */
+  .wx {
+    max-width: 100%;
+    overflow-x: hidden;          /* blocks sideways page-pan from inner scrollers */
+    box-sizing: border-box;
+  }
+
+  /* Current row: compact two-column */
+  .wx-now {
+    grid-template-columns: auto 1fr;
+    gap: 8px 12px;
+  }
+
+  /* Hourly: scroll INSIDE the widget, with snap, no page pan */
+  .wx-hours {
+    /* neutralize panel padding so scroller can touch edges without forcing page width */
+    margin-inline: -12px;
+    padding-inline: 12px;
+  }
+  .wx-strip {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    overflow-x: auto !important;           /* you can swipe this row */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;        /* prevent page from panning */
+  }
+  .wx-hour {
+    flex: 0 0 78px !important;             /* fixed tile width for readability */
+    scroll-snap-align: start;
+    text-align: center;
+  }
+
+  /* 7-day: readable single column */
+  .wx-grid {
+    grid-template-columns: 1fr !important; /* force one column on phones */
+    gap: 10px !important;
+  }
+  .wx-day {
+    display: grid;
+    grid-template-columns: 1fr auto auto;  /* Day | Icon | Temps */
+    align-items: center;
+    column-gap: 10px;
+    text-align: left;
+    padding: 12px;
+  }
+  .wx-day .temps { white-space: nowrap; justify-self: end; }
+  .wx-day .precip { grid-column: 1 / -1; margin-top: 2px; text-align: right; }
+}
+

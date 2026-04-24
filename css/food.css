@@ -1,0 +1,129 @@
+/* ===== Food & Drinks ===== */
+
+/* Filter bar (duplicated for independence from Events) */
+.list-filters{
+  display:grid; grid-template-columns: 1fr 180px 160px auto; gap:10px; align-items:center;
+  background: var(--panel); border:1px solid var(--border); border-radius: 14px; padding: 10px 12px;
+  box-shadow: 0 6px 18px var(--shadow);
+}
+@media (max-width: 820px){ .list-filters{ grid-template-columns: 1fr 1fr; } }
+.list-filters input[type="search"], .list-filters select{
+  background: var(--panel); color: var(--text); border: 1px solid var(--border);
+  border-radius: 10px; padding: 9px 10px;
+}
+.list-filters .switch{ display:inline-flex; align-items:center; gap:8px; font-weight:700; }
+
+/* Card layout */
+.place-card{ display:grid; grid-template-columns: 1fr auto; gap:10px; }
+.place-card .meta{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.badge-soft{ display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid var(--border); background:#e2e8f0; color:#0f172a; font-weight:700; }
+html[data-theme="dark"] .badge-soft{ background:#1f2937; color:#e5e7eb; }
+.badge-soft.is-on{ background: var(--accent); border-color: var(--accent); color:#fff; }
+.place-actions{ display:flex; align-items:center; }
+
+/* Narrow container alignment */
+.container.narrow { max-width: 980px; margin-inline: auto; }
+.container.narrow .list-filters { margin: 10px auto 0; }
+
+/* Mixed thumb-left cards */
+.card.thumb-left { display: grid; grid-template-columns: clamp(240px, 38%, 320px) 1fr; gap: 14px; }
+@media (max-width: 960px){ .card.thumb-left { grid-template-columns: 1fr; } }
+.card.thumb-left .thumb { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 18px var(--shadow); }
+
+/* Link styling */
+#food-list a { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s; }
+#food-list a:hover, #food-list a:focus { text-decoration-color: currentColor; }
+
+/* Spacing for food cards*/
+
+#food-list.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* wider cards */
+  gap: 40px;                      /* larger gap between each card */
+  align-items: start;
+  padding-top: 20px;
+}
+
+/* Card itself — larger padding & visual separation */
+#food-list .card.thumb-left {
+  gap: 20px;                      /* between image and content */
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: 0 8px 30px var(--shadow);
+  border: 1px solid var(--border);
+}
+
+/* Inner content layout */
+#food-list .place-card .place-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+#food-list .place-card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+#food-list .place-card .meta {
+  margin-top: 2px;
+  font-size: 0.95rem;
+}
+
+/* Buttons spaced nicely at bottom */
+#food-list .place-actions {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+/* Slight hover lift for each card */
+#food-list .card.thumb-left:hover {
+  transform: translateY(-3px);
+  transition: transform 0.2s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  #food-list.card-list {
+    gap: 32px;
+  }
+}
+@media (max-width: 600px) {
+  #food-list.card-list {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* Make sure buttons line up evenly and look tidy */
+#food-list .place-actions {
+  display: flex;
+  flex-wrap: wrap;          /* allows them to break into multiple rows if needed */
+  justify-content: flex-start;
+  gap: 10px 14px;           /* vertical | horizontal spacing between buttons */
+  margin-top: 14px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border); /* subtle separator line above buttons */
+}
+
+/* Each button consistent sizing and spacing */
+#food-list .place-actions .btn,
+#food-list .place-actions .btn-ghost {
+  flex: 1 1 auto;
+  min-width: 100px;          /* consistent width */
+  text-align: center;
+  padding: 8px 12px;
+}
+
+/* On small screens, center them */
+@media (max-width: 700px) {
+  #food-list .place-actions {
+    justify-content: center;
+    gap: 12px;
+  }
+}

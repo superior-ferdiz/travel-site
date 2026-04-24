@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/carousel.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/weather.css">
+  
+  <meta name="description" content="Explore hiking, skiing, and camping in Bø, Telemark.">
+  <meta property="og:title" content="Telemark Adventures">
+  <meta property="og:description" content="Trails, slopes, lakes—plan your trip.">
+  <meta property="og:image" content="images/slide1.jpg">
+  <meta name="theme-color" content="#0ea5e9">
+
+  <title>Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="images/icons/ta-logo.png">
+
+</head>
+<body class="is-hidden">
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="Telemark Adventures">
+        <img class="logo-mark" src="images/icons/ta-logo.png" alt="", width="28", height="28" decoding="async">
+        Telemark<span style="color: rgba(54, 188, 247);">Adventures</span></a>
+      <nav class="nav">
+        <a class="is-active" href="index.html">Home</a>
+        <a href="hiking.html">Hiking</a>
+        <a href="skiing.html">Skiing</a>
+        <a href="camping.html">Camping</a>
+        <a href="events.html">Events</a>
+        <a href="food.html">Dining</a>
+        <a href="journey.html">Plan</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">Dark mode</button>
+        <button id="translate-button" class="translate-btn" aria-expanded="false">🌐 Translate</button>
+
+        <!-- Custom popover AI -->
+        <div id="translate-menu" class="translate-menu" hidden>
+          <button class="translate-item" data-lang="en">🇬🇧 English</button>
+          <button class="translate-item" data-lang="no">🇳🇴 Norsk</button>
+          <button class="translate-item" data-lang="de">🇩🇪 Deutsch</button>
+          <button class="translate-item" data-lang="fr">🇫🇷 Français</button>
+          <button class="translate-item" data-lang="es">🇪🇸 Español</button>
+          <button class="translate-item" data-lang="it">🇮🇹 Italiano</button>
+          <button class="translate-item" data-lang="pl">🇵🇱 Polski</button>
+          <button class="translate-item" data-lang="ru">🇷🇺 Русский</button>
+          <button class="translate-item" data-lang="zh-CN">🇨🇳 中文(简体)</button>
+          <button class="translate-item" data-lang="ja">🇯🇵 日本語</button>
+        </div>
+
+        <!-- Keep Google widget mounted but visually removed -->
+        <div id="google_translate_element" class="gt-hidden"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero with parallax background -->
+  <section class="hero parallax hero-home"
+           data-parallax-speed="0.4"
+           style="--bg-image:url('images/hero.jpg'); background-image:url('images/hero.jpg'); background-repeat:no-repeat; background-size:cover; background-position:center;">
+    <div class="hero-inner">
+      <h1>Explore Bø & Telemark</h1>
+      <p>Hiking trails, ski slopes, and quiet lakes — all in one place.</p>
+      <a href="journey.html" class="btn">Start your journey</a> <!--#experiences-->
+    </div>
+    <a id="weather-badge"
+      class="wx-badge"
+      href="hiking.html#weather"
+      data-lat="59.413"
+      data-lon="9.069"
+      data-timezone="Europe/Oslo"
+      aria-live="polite">
+      <span class="wxb-icon" aria-hidden="true">⛅</span>
+      <span class="wxb-temp">--°C</span>
+      <span class="wxb-desc">Loading…</span>
+    </a>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container grid-2">
+      <div>
+        <h2>Where nature does the talking</h2>
+        <p>Telemark’s wild beauty speaks for itself - quiet forests, calm lakes, and mountain air that stirs the soul.</p>
+        <p>Here, every path leads to something worth remembering.</p>
+        <p>The journey is yours - we simply guide the way.</p>
+      </div>
+      <div class="card-list">
+        <a class="card" href="hiking.html">
+          <img src="images/hiking.jpg" alt="Hiking in Telemark" />
+          <div class="card-body">
+            <h3>Hiking</h3>
+            <p>Marked trails, ridge walks, and family-friendly routes.</p>
+          </div>
+        </a>
+        <a class="card" href="hiking.html">
+          <img src="images/skiing.jpg" alt="Skiing in Telemark" />
+          <div class="card-body">
+            <h3>Skiing</h3>
+            <p>From cross-country to alpine — pick your style.</p>
+          </div>
+        </a>
+        <a class="card" href="hiking.html">
+          <img src="images/camping.jpg" alt="Camping in Telemark" />
+          <div class="card-body">
+            <h3>Camping</h3>
+            <p>Lakeside camps and starry skies away from city lights.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiences (parallax divider) -->
+  <section class="divider parallax divider-home"
+           id="experiences"
+           data-parallax-speed="0.2"
+           style="--bg-image:url('images/tur.jpg'); background-image:url('images/tur.jpg'); background-repeat:no-repeat; background-size:cover; background-position:center;">
+    <h2>Choose your experience</h2>
+  </section>
+
+  <!-- Carousel Gallery -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <h2>Photo Carousel</h2>
+
+      <div class="carousel" aria-label="Image carousel" tabindex="0">
+        <button class="carousel-btn prev" aria-label="Previous slide">&#10094;</button>
+
+        <div class="carousel-track">
+          <div class="slide is-active"><img src="images/slide1.jpg" alt="Bø Sommerland" data-caption="Bø Sommerland" data-link="events.html" fetchpriority="high" decoding="async"/></div>
+          <div class="slide"><img src="images/slide2.jpg" alt="Climbing in Bø" data-caption="Climbing in Bø" data-link="events.html" loading="lazy" decoding="async"/></div>
+          <div class="slide"><img src="images/slide3.jpg" alt="Beautiful hiking trails" data-caption="Beautiful Hiking Trails"  data-link="hiking.html" loading="lazy" decoding="async"/></div>
+        </div>
+
+        <button class="carousel-btn next" aria-label="Next slide">&#10095;</button>
+
+        <div class="carousel-progress"><div class="bar"></div></div>
+        <div class="carousel-dots" role="tablist" aria-label="Choose slide"></div>
+        <a class="carousel-caption" aria-live="polite" aria-atomic="true" href="#"></a>
+      </div>
+
+      <p class="caption">Tip: Hover to pause. Use the arrows or dots to navigate. Click the caption.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <!-- Trip info / Plan your trip -->
+  <section id="plan" class="section">
+    <div class="container grid-2">
+      <div>
+        <h2>Plan your trip</h2>
+        <p>Use this area for opening hours, addresses, or directions. A contact form can be styled now and wired up later.</p>
+      </div>
+      <div>
+        <ul class="info">
+          <li><strong>Region:</strong> Bø, Telemark</li>
+          <li><strong>Season:</strong> All year</li>
+          <li><strong>Best for:</strong> Hiking, skiing, camping</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container contact-wrap">
+      <header class="section-head">
+        <h2>Contact Us</h2>
+        <p class="muted">Questions about hiking, skiing, or camping? We’re happy to help.</p>
+        <div class="status-bar">
+          <span class="dot"></span>
+          <span id="openStatus" aria-live="polite">Loading hours…</span>
+        </div>
+      </header>
+
+      <!-- Info strip -->
+      <div class="contact-row">
+        <!-- Email -->
+        <div class="info-card">
+          <div class="ico" aria-hidden="true">📧</div>
+          <div class="content">
+            <div class="label">Email</div>
+            <a id="cEmail" href="mailto:youremail@example.com">Click for our mail!</a>
+          </div>
+          <button class="btn btn-ghost sm copy" data-copy="#cEmail">Copy</button>
+        </div>
+
+        <!-- Phone -->
+        <div class="info-card">
+          <div class="ico" aria-hidden="true">📞</div>
+          <div class="content">
+            <div class="label">Phone</div>
+            <a id="cPhone" href="tel:+4700000000">+47 00 00 00 00</a>
+          </div>
+          <button class="btn btn-ghost sm copy" data-copy="#cPhone">Copy</button>
+        </div>
+
+        <!-- Address -->
+        <div class="info-card">
+          <div class="ico" aria-hidden="true">📍</div>
+          <div class="content">
+            <div class="label">Address</div>
+            <div>Bø i Telemark, Norway</div>
+            <div id="distance" class="muted small"></div>
+          </div>
+          <button class="btn btn-ghost sm directions" data-lat="59.413" data-lon="9.069">Directions</button>
+        </div>
+      </div>
+
+      <!-- Form card (centered) -->
+      <form id="contactForm" class="contact-card" novalidate>
+        <div class="form-row">
+          <label> Name
+            <input name="name" autocomplete="name" required>
+          </label>
+          <label> Email
+            <input name="email" type="email" autocomplete="email" required>
+          </label>
+        </div>
+
+        <label> Topic
+          <select name="topic">
+            <option>General</option>
+            <option>Hiking</option>
+            <option>Skiing</option>
+            <option>Camping</option>
+          </select>
+        </label>
+
+        <label> Message
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn">Send via email</button>
+          <button type="button" id="saveDraft" class="btn btn-ghost">Save draft</button>
+        </div>
+        <p class="caption">Opens your email app with the message pre-filled.</p>
+      </form>
+    </div>
+
+    <br>
+    <button onclick="topFunction()" id="top-btn" title="Go to top">Top</button>
+
+    <br>
+    <br>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Telemark Adventures · Ferdinand Risan</p>
+    </div>
+  </footer>
+
+
+  <script src="js/script.js"></script>
+  <script src="js/weather-badge.js"></script>
+  <script src="js/contact.js"></script>
+
+
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
+
+</body>
+</html>

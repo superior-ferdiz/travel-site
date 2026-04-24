@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/journey.css">
+
+  <meta name="description" content="Plan your trip to Bø in Telemark — places to stay and experiences to choose from.">
+  <meta property="og:title" content="Plan Your Journey · Telemark Adventures">
+  <meta property="og:image" content="images/hero.jpg">
+  <meta name="theme-color" content="#0ea5e9">
+
+  <title>Plan Your Journey</title>
+  <link rel="icon" href="images/icons/ta-logo.png">
+</head>
+<body class="is-hidden">
+  <!-- Header / Navigation (same as site) -->
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="Telemark Adventures">
+        <img class="logo-mark" src="images/icons/ta-logo.png" alt="" width="28" height="28" decoding="async">
+        Telemark<span style="color: rgba(54, 188, 247);">Adventures</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="hiking.html">Hiking</a>
+        <a href="skiing.html">Skiing</a>
+        <a href="camping.html">Camping</a>
+        <a href="events.html">Events</a>
+        <a href="food.html">Dining</a>
+        <a class="is-active" href="journey.html">Plan</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">Dark mode</button>
+        <button id="translate-button" class="translate-btn" aria-expanded="false">🌐 Translate</button>
+        <div id="google_translate_element" class="gt-hidden"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero (parallax style like home) -->
+  <section class="hero parallax" style="--bg-image:url('images/boitelemark.jpg'); background-image:url('images/boitelemark.jpg');">
+    <div class="hero-inner">
+      <h1>Plan Your Journey</h1>
+      <p>Pick a place to stay and add the experiences you want — we’ll shape a simple plan.</p>
+    </div>
+  </section>
+
+  <main class="section">
+    <div class="container">
+      <!-- Filters / choices -->
+      <form id="journey-form" class="journey-filters" aria-label="Plan selections">
+        <div class="row">
+          <label>
+            Stay
+            <select name="stay" required>
+              <option value="">Choose…</option>
+              <option value="hotel">Hotel in Bø</option>
+              <option value="cabin">Cabin near Lifjell</option>
+              <option value="camp">Campsite by the lake</option>
+            </select>
+          </label>
+
+          <label>
+            Trip length
+            <select name="days" required>
+              <option value="">Choose…</option>
+              <option value="2">Weekend (2 days)</option>
+              <option value="4">Short break (3–4 days)</option>
+              <option value="7">Full week (7 days)</option>
+            </select>
+          </label>
+
+          <button type="submit" class="btn">Build my plan</button>
+        </div>
+
+        <fieldset class="features">
+          <legend>Experiences</legend>
+          <label><input type="checkbox" name="exp" value="hike"> Hiking trails</label>
+          <label><input type="checkbox" name="exp" value="summit"> Summit views</label>
+          <label><input type="checkbox" name="exp" value="lake"> Lake swim / paddle</label>
+          <label><input type="checkbox" name="exp" value="ski"> Skiing (alpine/XC)</label>
+          <label><input type="checkbox" name="exp" value="food"> Local food & cafés</label>
+          <label><input type="checkbox" name="exp" value="culture"> Culture & cinema</label>
+        </fieldset>
+      </form>
+
+      <!--Show saved hikes-->
+      <section id="saved-hikes" class="section" hidden>
+        <h2>Your saved hikes</h2>
+        <div id="hike-cards" class="card-list"></div>
+      </section>
+
+
+      <!-- Suggestion cards (same card visual language) -->
+      <section class="section" id="suggestions" hidden>
+        <h2>Suggested places to stay</h2>
+        <div id="stay-cards" class="card-list"></div>
+
+        <h2 style="margin-top:28px;">Suggested experiences</h2>
+        <div id="exp-cards" class="card-list"></div>
+      </section>
+
+      <!-- Summary -->
+      <section id="journey-result" class="journey-result" hidden aria-live="polite"></section>
+
+      <!-- CTA -->
+      <div id="journey-cta" class="journey-cta" hidden>
+        <a class="btn" href="hiking.html">See hiking</a>
+        <a class="btn" href="skiing.html">Check skiing</a>
+        <a class="btn" href="food.html">Find dining</a>
+      </div>
+    </div>
+
+    <br>
+    <button onclick="topFunction()" id="top-btn" title="Go to top">Top</button>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Telemark Adventures · Ferdinand Risan</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/journey.js"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

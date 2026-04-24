@@ -1,0 +1,69 @@
+/* Journey page — matches site’s tokens and components */
+
+.journey-filters {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 30px var(--shadow);
+  display: grid; gap: 12px;
+  margin-bottom: 18px;
+}
+.journey-filters .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+@media (max-width: 900px){ .journey-filters .row { grid-template-columns: 1fr; } }
+
+.journey-filters label { display: grid; gap: 6px; font-weight: 700; }
+.journey-filters select {
+  width: 100%;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 10px;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.journey-filters fieldset.features {
+  margin: 4px 0 0;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 10px;
+}
+.journey-filters fieldset.features legend {
+  padding: 0 6px;
+  color: var(--muted);
+  font-weight: 700;
+}
+.journey-filters fieldset.features label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 10px 0 0;
+  font-weight: 600;
+}
+
+/* suggestion cards use global .card-list styles */
+#suggestions h2 { margin: 10px 0; }
+
+/* summary box */
+.journey-result {
+  margin-top: 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+.journey-result h3 { margin-top: 0; }
+
+.journey-cta {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,936 @@
+/* Base / Reset */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+
+/* Theme tokens */
+:root {
+  /* Light theme (default) */
+  --bg: #f8fafc;            /* slate-50 */
+  --text: #0f172a;          /* slate-900 */
+  --panel: #ffffff;
+  --muted: #64748b;         /* slate-500 */
+  --border: #e2e8f0;        /* slate-200 */
+  --accent: #0ea5e9;        /* sky-500 */
+  --accent-600: #0284c7;    /* sky-600 */
+  --shadow: rgba(2,132,199,.08);
+  --shadow-strong: rgba(2,132,199,.16);
+  --header-glass: rgba(248,250,252,.7);
+  --overlay: rgba(0,0,0,.35);
+}
+
+html[data-theme="dark"] {
+  --bg: #0b1220;            /* near slate-950 */
+  --text: #e5e7eb;          /* slate-200 */
+  --panel: #0f172a;         /* slate-900 */
+  --muted: #94a3b8;         /* slate-400 */
+  --border: #1e293b;        /* slate-800 */
+  --accent: #38bdf8;        /* sky-400 */
+  --accent-600: #0ea5e9;    /* sky-500 */
+  --shadow: rgba(2,132,199,.15);
+  --shadow-strong: rgba(2,132,199,.30);
+  --header-glass: rgba(2,6,23,.6);
+  --overlay: rgba(0,0,0,.45);
+}
+
+/* Utilities */
+.container { width: min(1100px, 92%); margin-inline: auto; }
+.section { padding: 64px 0; }
+.grid-2 { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; }
+@media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  background: var(--accent);
+  color: white; text-decoration: none; font-weight: 600;
+  border-radius: 10px;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  box-shadow: 0 6px 18px var(--shadow);
+}
+.btn:hover { background: var(--accent-600); transform: translateY(-1px); }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: var(--header-glass); border-bottom: 1px solid var(--border); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+.logo { font-weight: 800; font-size: 1.25rem; color: var(--text); text-decoration: none; letter-spacing: .3px; }
+.logo span { color: var(--accent); }
+.nav { display: flex; align-items: center; gap: 20px; }
+.nav a { color: var(--text); text-decoration: none; font-weight: 600; position: relative; }
+.nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
+.nav a:hover::after { transform: scaleX(1); }
+
+.theme-toggle { border-radius: 999px; padding: 6px 10px; border: 1px solid var(--border); background: var(--panel); color: var(--text); cursor: pointer; box-shadow: 0 4px 12px var(--shadow); font-weight: 600; }
+.theme-toggle:hover { box-shadow: 0 6px 18px var(--shadow-strong); }
+
+/* Hero / Parallax */
+.hero {
+  position: relative; display: grid; place-items: center; text-align: center;
+  min-height: 70vh; color: white;
+  background-image: var(--bg-image);
+  background-size: cover; background-position: center;
+}
+@media (min-width: 768px) {
+  .hero.parallax, .divider.parallax { background-attachment: fixed; }
+}
+.hero::after {
+  pointer-events: none;
+  content: ""; position: absolute; inset: 0; background: linear-gradient(var(--overlay), var(--overlay));
+}
+.hero-inner { position: relative; z-index: 1; padding: 80px 16px; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin: 0 0 10px; }
+.hero p { margin: 0 0 20px; font-size: clamp(1rem, 2.5vw, 1.25rem); opacity: .95; }
+
+/* Cards */
+.card-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .card-list { grid-template-columns: 1fr; } }
+.card { border-radius: 16px; overflow: hidden; background: var(--panel); box-shadow: 0 10px 30px var(--shadow); transition: transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px var(--shadow-strong); }
+.card img { aspect-ratio: 16/10; object-fit: cover; }
+.card-body { padding: 14px 16px 18px; }
+.card-body h3 { margin: 4px 0 6px; }
+.card-body p { margin: 0; color: var(--muted); }
+
+/* Divider parallax */
+.divider {
+  position: relative; display: grid; place-items: center; text-align: center; color: white;
+  min-height: 40vh; background-image: var(--bg-image); background-size: cover; background-position: center;
+}
+.divider::after { pointer-events: none; content: ""; position: absolute; inset: 0; background: var(--overlay); }
+.divider h2 { position: relative; z-index: 1; font-size: clamp(1.6rem, 4vw, 2.5rem); }
+
+/* Carousel */
+.carousel { position: relative; overflow: hidden; border-radius: 16px; box-shadow: 0 12px 36px var(--shadow-strong); background: var(--panel); }
+/* gradient edge vignettes */
+.carousel::before, .carousel::after { content: ""; position: absolute; top: 0; bottom: 0; width: 80px; pointer-events: none; z-index: 2; }
+.carousel::before { left: 0; background: linear-gradient(to right, rgba(0,0,0,.18), transparent); mix-blend-mode: multiply; }
+.carousel::after  { right: 0; background: linear-gradient(to left, rgba(0,0,0,.18), transparent); mix-blend-mode: multiply; }
+html[data-theme="dark"] .carousel::before { background: linear-gradient(to right, rgba(0,0,0,.35), transparent); }
+html[data-theme="dark"] .carousel::after  { background: linear-gradient(to left,  rgba(0,0,0,.35), transparent); }
+
+.carousel-track { display: flex; transition: transform .5s ease; will-change: transform; }
+.slide { min-width: 100%; user-select: none; }
+.slide img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; display: block; }
+
+/* arrows */
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); border: 1px solid var(--border); background: rgba(15,23,42,.45); color: white; font-size: 24px; width: 44px; height: 44px; border-radius: 999px; cursor: pointer; display: grid; place-items: center; z-index: 3; backdrop-filter: blur(6px); box-shadow: 0 8px 24px var(--shadow-strong); opacity: .95; }
+.carousel-btn:hover { background: rgba(15,23,42,.7); }
+.carousel .prev { left: 12px; }
+.carousel .next { right: 12px; }
+
+/* progress bar */
+.carousel-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(148,163,184,.25); z-index: 3; }
+html[data-theme="dark"] .carousel-progress { background: rgba(148,163,184,.18); }
+.carousel-progress .bar { width: 0%; height: 100%; background: var(--accent); }
+
+/* dots on image */
+.carousel-dots{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  z-index: 3;
+}
+.carousel-dots button{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+html[data-theme="dark"] .carousel-dots button { background: #334155; }
+.carousel-dots button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); transform: scale(1.25); }
+
+/* drag-to-swipe UX */
+.carousel-track { cursor: grab; }
+.carousel.is-dragging .carousel-track { cursor: grabbing; }
+.slide img { user-select: none; pointer-events: none; }
+
+/* caption overlay */
+.carousel-caption { position: absolute; left: 12px; bottom: 16px; z-index: 3; padding: 8px 12px; border-radius: 10px; background: rgba(15,23,42,.6); color: white; font-weight: 600; backdrop-filter: blur(6px); box-shadow: 0 6px 18px var(--shadow-strong); max-width: 70%; text-decoration: none; cursor:pointer;}
+
+/* small helper text */
+.caption { color: var(--muted); font-size: .95rem; margin-top: 8px; font-style: italic;}
+
+/* Contact */
+.info { list-style: none; padding: 0; margin: 0; }
+.info li { padding: 8px 0; border-bottom: 1px dashed var(--border); }
+
+/* Footer */
+.site-footer { padding: 28px 0; background: var(--panel); border-top: 1px solid var(--border); color: var(--muted); }
+.site-footer p { margin: 0; text-align: center; }
+
+/* Do I really need these lines though?*/
+html { scroll-behavior: smooth; }
+.btn:focus-visible, .nav a:focus-visible, .carousel-btn:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .carousel-track{ transition:none; }
+} 
+
+/* Anchor offset for sticky header + smooth scrolling */
+:root { --header-offset: 72px; }  /* tweak to your header's real height */
+[id] { scroll-margin-top: calc(var(--header-offset) + 8px); }
+html { scroll-behavior: smooth; }
+
+
+/* Responsive sources for homepage hero + divider */
+.hero-home  { --bg-image: url('images/hero-1600.jpg');  background-image: var(--bg-image); }
+@media (max-width: 900px) { .hero-home  { --bg-image: url('images/hero-800.jpg'); } }
+
+.divider-home { --bg-image: url('images/tur-1600.jpg');   background-image: var(--bg-image); }
+@media (max-width: 900px) { .divider-home { --bg-image: url('images/tur-800.jpg'); } }
+
+.hero-hiking { --bg-image: url('images/hiking-1600.jpg'); }
+@media (max-width:900px){ .hero-hiking { --bg-image: url('images/hiking-800.jpg'); } }
+
+.hero-skiing { --bg-image: url('images/skiing-1600.jpg'); }
+@media (max-width:900px){ .hero-skiing { --bg-image: url('images/skiing-800.jpg'); } }
+
+.hero-camping { --bg-image: url('images/camping-1600.jpg'); }
+@media (max-width:900px){ .hero-camping { --bg-image: url('images/camping-800.jpg'); } }
+
+
+/* ===== Page fade (out on leave, in on full load) ===== */
+html.js body { opacity: 1; }                 /* default when JS is on */
+html.js body.is-hidden { opacity: 0; }       /* before window 'load' */
+html.js body.is-visible {                    /* fade-in after load */
+  opacity: 1;
+  transition: opacity .35s ease;
+}
+html.js body.is-leaving {                    /* fade-out on click */
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+/* Respect accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html.js body.is-visible,
+  html.js body.is-leaving { transition: none !important; }
+}
+
+/* Clickable cards */
+a.card { display: block; text-decoration: none; color: inherit; }
+a.card:hover { text-decoration: none; }
+a.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.card { cursor: pointer; }
+
+/* === Weather widget (Hiking page) === */
+.wx {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.wx-now {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.wx-now .wx-icon { font-size: 2rem; line-height: 1; }
+.wx-now .wx-temp { font-size: clamp(1.75rem, 3.5vw, 2.25rem); font-weight: 800; }
+.wx-now .wx-meta { color: var(--muted); }
+
+.wx-hours { margin-top: 8px; }
+.wx-hours h3, .wx-days h3 { margin: 8px 0 10px; font-size: 1rem; color: var(--muted); }
+.wx-strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(64px, 1fr); gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+.wx-hour { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 8px; text-align: center; }
+.wx-hour .t { font-weight: 700; }
+.wx-hour .i { font-size: 1.25rem; line-height: 1; margin: 2px 0; }
+.wx-hour .v { font-weight: 700; }
+.wx-hour .p { color: var(--muted); font-size: .9rem; }
+
+.wx-days { margin-top: 12px; }
+.wx-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+@media (max-width: 900px){ .wx-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 600px){ .wx-grid { grid-template-columns: repeat(3, 1fr); } }
+.wx-day { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 10px; text-align: center; }
+.wx-day .name { font-weight: 700; margin-bottom: 2px; }
+.wx-day .i { font-size: 1.25rem; line-height: 1; margin: 2px 0; }
+.wx-day .temps { display: flex; justify-content: center; gap: 6px; }
+.wx-day .temps .max { font-weight: 800; }
+.wx-day .temps .min { color: var(--muted); }
+.wx-day .precip { color: var(--muted); font-size: .9rem; }
+
+.wx-error { color: #b91c1c; font-weight: 700; }
+
+/* === Compact Weather Badge (homepage hero) === */
+.wx-badge{
+  position: absolute; left: 16px; bottom: 16px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 12px;
+  background: rgba(15,23,42,.55); /* glassy */
+  color: #fff; text-decoration: none; font-weight: 700;
+  border: 1px solid var(--border); backdrop-filter: blur(6px);
+  box-shadow: 0 8px 24px var(--shadow-strong);
+}
+.wx-badge .wxb-icon{ font-size: 1.25rem; line-height: 1; }
+.wx-badge .wxb-temp{ font-size: 1.1rem; }
+.wx-badge .wxb-desc{ font-weight: 600; opacity: .95; }
+.wx-badge:hover{ filter: brightness(1.05); }
+
+/* ensure it sits above the hero overlay */
+.hero { position: relative; }
+
+
+/* === Trail finder === */
+.trail-filters .row { display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap: 12px; align-items: end; }
+@media (max-width: 900px){ .trail-filters .row { grid-template-columns: 1fr 1fr; } }
+.trail-filters label { display: grid; gap: 6px; font-weight: 700; }
+.trail-filters select, .trail-filters input[type="range"] {
+  width: 100%; background: var(--panel); color: var(--text); border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 10px; box-shadow: 0 4px 12px var(--shadow);
+}
+.trail-filters .range output { font-weight: 700; color: var(--accent); margin-left: 6px; }
+.trail-filters fieldset.features { margin-top: 10px; border: 1px dashed var(--border); border-radius: 10px; padding: 10px; }
+.trail-filters fieldset.features legend { padding: 0 6px; color: var(--muted); }
+.trail-filters fieldset.features label { display: inline-flex; align-items: center; gap: 6px; margin: 6px 10px 0 0; font-weight: 600; }
+
+.btn-ghost { background: var(--panel); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; cursor: pointer; }
+.btn-ghost:hover { box-shadow: 0 6px 18px var(--shadow-strong); }
+
+/* Trail list */
+.trail-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+@media (max-width: 1000px){ .trail-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 680px){ .trail-list { grid-template-columns: 1fr; } }
+
+.trail-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px var(--shadow); display: flex; flex-direction: column; }
+.trail-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.trail-card .body { padding: 12px 14px; display: grid; gap: 10px; }
+.trail-card h3 { margin: 0; }
+.trail-card .meta { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-weight: 600; }
+.metric { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border: 1px dashed var(--border); border-radius: 999px; }
+.metric .dot { width: 8px; height: 8px; border-radius: 999px; display: inline-block; }
+.dot.easy { background: #22c55e; }     /* green */
+.dot.moderate { background: #f59e0b; } /* amber */
+.dot.hard { background: #ef4444; }     /* red */
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: .85rem; background: #e2e8f0; color: #0f172a; border: 1px solid var(--border); padding: 2px 8px; border-radius: 999px; }
+html[data-theme="dark"] .tag { background: #1f2937; color: #e5e7eb; }
+
+.trail-card .actions { display: flex; gap: 8px; margin-top: 2px; }
+.trail-card .actions a { text-decoration: none; font-weight: 700; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); }
+.trail-card .actions a:hover { box-shadow: 0 6px 18px var(--shadow-strong); }
+
+/* Map */
+.map-wrap { position: relative; }
+
+/* Seasons block uses existing .card-list styles */
+
+/* Checklists */
+.checklist { padding-left: 1.1em; }
+.checklist li { margin: 6px 0; }
+
+/* Trail card details + embedded map */
+.trail-card details.more { margin-top: 8px; }
+.trail-card details.more summary { cursor: pointer; font-weight: 800; }
+.trail-card .info-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin: 8px 0; }
+.trail-card .info-grid div { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 8px; font-weight: 600; }
+.trail-card iframe { width: 100%; height: 260px; border: 0; border-radius: 12px; box-shadow: 0 8px 24px var(--shadow); }
+
+/* Highlight when jumping from Popular routes */
+.trail-card.is-highlight { outline: 3px solid var(--accent); outline-offset: 3px; transform: scale(1.01); transition: transform .2s ease; }
+
+
+/* === Campsite finder === */
+.camp-filters .row { display: grid; grid-template-columns: repeat(3, minmax(180px, 1fr)); gap: 12px; align-items: end; }
+@media (max-width: 900px){ .camp-filters .row { grid-template-columns: 1fr 1fr; } }
+.camp-filters label { display: grid; gap: 6px; font-weight: 700; }
+.camp-filters select {
+  width: 100%; background: var(--panel); color: var(--text); border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 10px; box-shadow: 0 4px 12px var(--shadow);
+}
+.btn-ghost { background: var(--panel); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; cursor: pointer; }
+.btn-ghost:hover { box-shadow: 0 6px 18px var(--shadow-strong); }
+
+.camp-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
+@media (max-width: 900px){ .camp-list { grid-template-columns: 1fr; } }
+
+.camp-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px var(--shadow); display: flex; flex-direction: column; }
+.camp-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.camp-card .body { padding: 12px 14px; display: grid; gap: 10px; }
+.camp-card h3 { margin: 0; }
+.camp-card .meta { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-weight: 600; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge { font-size: .85rem; background: #e2e8f0; color: #0f172a; border: 1px solid var(--border); padding: 2px 8px; border-radius: 999px; }
+html[data-theme="dark"] .badge { background: #1f2937; color: #e5e7eb; }
+
+.camp-card details.more { margin-top: 8px; }
+.camp-card details.more summary { cursor: pointer; font-weight: 800; }
+.camp-card iframe { width: 100%; height: 260px; border: 0; border-radius: 12px; box-shadow: 0 8px 24px var(--shadow); }
+
+/* Reuse checklists / map-wrap from hiking */
+
+
+
+
+/* === Hotels section reuses camp card grid === */
+.camp-card .info-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 8px; margin: 8px 0;
+}
+.camp-card .info-grid > div {
+  background: var(--panel); border: 1px dashed var(--border);
+  border-radius: 10px; padding: 8px; font-weight: 600;
+}
+
+/* === Gear checklist === */
+.gear { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 900px){ .gear { grid-template-columns: 1fr; } }
+.gear-col h3 { margin: 0 0 6px; }
+.gear-col ul { list-style: none; padding: 0; margin: 0; }
+.gear-col li { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; background: var(--panel); box-shadow: 0 4px 12px var(--shadow); }
+.gear-col input[type="checkbox"] { inline-size: 1.05rem; block-size: 1.05rem; margin-right: 8px; }
+.gear-actions { margin-top: 10px; display: flex; gap: 10px; }
+
+/* Print: keep only the checklist content for a clean one-pager */
+@media print {
+  body * { visibility: hidden; }
+  #gear, #gear * { visibility: visible; }
+  #gear { position: absolute; inset: 0 auto auto 0; width: 100%; }
+}
+
+
+
+
+
+
+/* === Snow widget (Skiing page) === */
+.wx--ski { display: grid; gap: 12px; }
+.snow { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 12px; box-shadow: 0 10px 30px var(--shadow); }
+.snow h3 { margin: 0 0 8px; font-size: 1rem; color: var(--muted); }
+
+.snow-now { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px; }
+.snow-now .cell { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 8px; text-align: center; font-weight: 700; }
+.snow-now .label { display:block; font-weight: 600; color: var(--muted); }
+
+.snow-bars { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(36px, 1fr); gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+.snow-bar { display: grid; gap: 4px; text-align: center; }
+.snow-bar .col { height: 60px; border-radius: 6px; background: linear-gradient(to top, var(--accent), transparent); box-shadow: 0 6px 18px var(--shadow); }
+.snow-bar .val { font-weight: 700; }
+.snow-bar .t  { color: var(--muted); font-size: .85rem; }
+
+.snow-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+@media (max-width: 900px){ .snow-days { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 600px){ .snow-days { grid-template-columns: repeat(3, 1fr); } }
+.snow-day { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 8px; text-align: center; }
+.snow-day .name { font-weight: 700; margin-bottom: 2px; }
+.snow-day .mm { font-weight: 800; }
+.snow-day .freeze { color: var(--muted); font-size: .9rem; }
+
+/* === Night / Lit toggles === */
+.toggles { display: flex; align-items: center; gap: 10px; margin: 6px 0 2px; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
+.toggle input { width: 1.05rem; height: 1.05rem; }
+.badge-night { background: #e2e8f0; color: #0f172a; border: 1px solid var(--border); }
+html[data-theme="dark"] .badge-night { background: #1f2937; color: #e5e7eb; }
+.badge-night.is-on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* === Prices === */
+.price-cards { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; }
+@media (max-width: 900px){ .price-cards { grid-template-columns: 1fr; } }
+.price-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 14px; box-shadow: 0 10px 30px var(--shadow); }
+.price-card h3 { margin: 4px 0 10px; }
+
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table th, .price-table td { text-align: left; padding: 10px 8px; border-bottom: 1px dashed var(--border); }
+.price-table thead th { color: var(--muted); font-weight: 800; }
+.price-table tbody tr:last-child td { border-bottom: 0; }
+
+
+
+
+
+/* ===== Contact v3 (scoped, centered, responsive) ===== */
+
+/* Section header */
+#contact .section-head { text-align: center; }
+#contact .section-head h2 { margin: 0; }
+#contact .section-head .muted { margin: 6px 0 10px; }
+
+/* “Open now” pill */
+#contact .status-bar{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 10px; border-radius:999px; margin-inline:auto; /* centered */
+  background: rgba(15,23,42,.06); border:1px solid var(--border);
+  font-weight:700;
+}
+html[data-theme="dark"] #contact .status-bar{ background:rgba(15,23,42,.25); }
+#contact .status-bar .dot{
+  width:8px; height:8px; border-radius:999px; background:#10b981;
+  box-shadow:0 0 0 3px rgba(16,185,129,.18);
+}
+
+/* Wrapper grid */
+#contact .contact-wrap{ display:grid; gap:24px; }
+
+/* Info row — centered and auto-fit */
+#contact .contact-row{
+  width:min(980px, 100%);
+  margin-inline:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+  gap:14px;
+}
+
+/* Info cards */
+#contact .info-card{
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px;
+  padding:12px 14px;
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:16px; box-shadow:0 8px 24px var(--shadow);
+}
+#contact .info-card .ico{
+  width:36px; height:36px; border-radius:999px; display:grid; place-items:center;
+  background:rgba(56,189,248,.18); box-shadow:inset 0 0 0 1px var(--border);
+  font-size:18px;
+}
+#contact .info-card .label{ font-weight:800; margin-bottom:2px; }
+#contact .info-card .content{ min-width:0; }
+#contact .info-card .content a{ text-decoration:none; }
+#contact .small{ font-size:.9rem; }
+#contact .btn.sm{ padding:7px 10px; border-radius:10px; }
+
+/* Form card — centered and narrower so it doesn’t sprawl */
+#contact .contact-card{
+  width:min(720px, 100%);
+  margin-inline:auto;
+  display:grid; gap:12px;
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:16px; padding:16px; box-shadow:0 10px 30px var(--shadow);
+}
+#contact .contact-card .form-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+}
+@media (max-width:720px){
+  #contact .contact-card .form-row{ grid-template-columns:1fr; }
+}
+#contact .contact-card label{ display:grid; gap:6px; font-weight:700; }
+#contact .contact-card input,
+#contact .contact-card select,
+#contact .contact-card textarea{
+  background:var(--panel); color:var(--text); border:1px solid var(--border);
+  border-radius:12px; padding:10px 12px; box-shadow:0 4px 12px var(--shadow);
+}
+#contact .contact-card input:focus,
+#contact .contact-card select:focus,
+#contact .contact-card textarea:focus{
+  outline:3px solid var(--accent); outline-offset:2px;
+}
+#contact .contact-card .actions{ display:flex; gap:10px; align-items:center; }
+
+/* Map consistency */
+#contact .map-wrap iframe{ box-shadow:0 10px 30px var(--shadow); border-radius:16px; }
+
+/* Subtle invalid highlight only after submit */
+#contact .contact-card input:invalid,
+#contact .contact-card textarea:invalid{ outline:2px solid transparent; }
+#contact .contact-card.submitted input:invalid,
+#contact .contact-card.submitted textarea:invalid{ outline-color:#ef4444; }
+
+/* Center the form card */
+#contact .contact-card {
+  max-width: 720px;     /* form width cap */
+  width: 100%;
+  margin-left: auto;    /* centers horizontally */
+  margin-right: auto;
+}
+
+/* (Optional) also center children in the contact section */
+#contact .contact-wrap { place-items: center; }
+
+/* Make sure older rules don't override these */
+#contact form.contact-card { max-width: 720px; width: 100%; margin-inline: auto; }
+#contact .contact-wrap { max-width: 980px; margin-inline: auto; }
+#contact .contact-card { max-width: 720px; margin-inline: auto; }
+
+/* Spacing between form and map */
+#contact .contact-map { margin-top: clamp(24px, 4vw, 44px); }
+
+/* Add a little space between the info row and the form */
+#contact .contact-row { margin-bottom: clamp(10px, 2.5vw, 18px); }
+#contact .contact-card { margin-top: clamp(12px, 2.5vw, 20px); }
+
+/* Smooth, modern link treatment in Contact */
+#contact a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;      /* hide underline by default */
+  text-underline-offset: 3px;
+  transition: text-decoration-color .15s ease, color .15s ease, opacity .15s ease;
+}
+#contact a:hover, #contact a:focus {
+  text-decoration-color: currentColor;     /* show underline on hover/focus */
+}
+
+/* Prevent copy/directions buttons from overlapping long text */
+#contact .info-card { grid-template-columns: auto 1fr auto; align-items: center; }
+#contact .info-card .content { min-width: 0; }
+#contact .info-card .content a {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;                  /* … if the email/phone is long */
+  white-space: nowrap;
+}
+#contact .info-card .btn { flex-shrink: 0; white-space: nowrap; }
+
+/* On very narrow screens, let the button drop below neatly */
+@media (max-width: 380px){
+  #contact .info-card { grid-template-columns: auto 1fr; grid-auto-rows: auto; }
+  #contact .info-card .btn { grid-column: 1 / -1; justify-self: start; margin-top: 6px; }
+}
+
+/* Make the "Opens your email app…" caption sit nicely under the form */
+#contact .contact-card .caption { margin-top: 4px; color: var(--muted); }
+
+
+
+
+
+
+
+
+
+
+/* === Filter bars shared by Events / Food === */
+.list-filters{
+  display:grid; grid-template-columns: 1fr 180px 160px auto; gap:10px; align-items:center;
+  background: var(--panel); border:1px solid var(--border); border-radius: 14px; padding: 10px 12px;
+  box-shadow: 0 6px 18px var(--shadow);
+}
+@media (max-width: 820px){ .list-filters{ grid-template-columns: 1fr 1fr; } }
+.list-filters input[type="search"], .list-filters select{
+  background: var(--panel); color: var(--text); border: 1px solid var(--border);
+  border-radius: 10px; padding: 9px 10px;
+}
+.list-filters .switch{ display:inline-flex; align-items:center; gap:8px; font-weight:700; }
+
+/* Events list */
+.events .list-divider{ grid-column: 1 / -1; margin: 16px 2px 6px; color: var(--muted); }
+.event-card{ display:grid; grid-template-columns: 1fr auto; gap:10px; }
+.event-card .meta{ display:flex; flex-wrap:wrap; gap:10px; color: var(--muted); font-weight:600; }
+.event-actions{ display:flex; gap:8px; align-items:center; }
+
+/* Food list */
+.place-card{ display:grid; grid-template-columns: 1fr auto; gap:10px; }
+.place-card .meta{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.badge-soft{ display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid var(--border); background:#e2e8f0; color:#0f172a; font-weight:700; }
+html[data-theme="dark"] .badge-soft{ background:#1f2937; color:#e5e7eb; }
+.badge-soft.is-on{ background: var(--accent); border-color: var(--accent); color:#fff; }
+.place-actions{ display:flex; align-items:center; }
+
+/* === Centered content + thumbnail cards (Events & Food) === */
+.container.narrow { max-width: 980px; margin-inline: auto; }
+
+/* Filter bar sits nicely within narrow containers */
+.container.narrow .list-filters { margin: 0 auto; }
+
+/* Thumb-on-left cards */
+.card.thumb-left {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+@media (max-width: 780px){
+  .card.thumb-left { grid-template-columns: 1fr; }
+}
+.card.thumb-left .thumb {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px var(--shadow);
+}
+
+/* Tidy action rows */
+.event-actions, .place-actions {
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+}
+
+/* Optional: slightly tighter list headings */
+.events .list-divider { margin: 14px 2px 6px; }
+
+/* Events & Food — same centered width as the rest of the site */
+.container.narrow { max-width: 980px; margin-inline: auto; }
+
+/* Filter bar spacing & look (uses your existing tokens) */
+.container.narrow .list-filters { margin-top: 10px; }
+.list-filters { gap: 10px; }
+@media (max-width: 820px){ .list-filters { grid-template-columns: 1fr 1fr; } }
+
+/* Card grid: never squeeze below 420px; fall to 1 column on small screens */
+.card-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 16px; }
+@media (max-width: 900px){ .card-list { grid-template-columns: 1fr; } }
+
+/* Thumb-on-left cards (image stacks above on narrow screens) */
+.card.thumb-left { display: grid; grid-template-columns: clamp(240px, 38%, 320px) 1fr; gap: 14px; }
+@media (max-width: 960px){ .card.thumb-left { grid-template-columns: 1fr; } }
+.card.thumb-left .thumb { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 18px var(--shadow); }
+
+/* Meta rows & links feel integrated */
+.event-card .meta, .place-card .meta { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-weight: 600; }
+#event-list a, #food-list a { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s; }
+#event-list a:hover, #food-list a:focus { text-decoration-color: currentColor; }
+
+
+
+
+/* === Hero (make text white, improve contrast) ========================== */
+.hero.parallax .hero-inner,
+.hero.parallax .hero-inner h1,
+.hero.parallax .hero-inner p {
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
+.hero.parallax .hero-overlay{
+  background: linear-gradient(to bottom, rgba(0,0,0,.28), rgba(0,0,0,.38));
+}
+
+/* === Page centering & spacing ========================================= */
+.container.narrow { max-width: 980px; margin-inline: auto; }
+.container.narrow .list-filters { margin: 12px auto 14px; }
+
+/* Give the list some breathing room under the hero */
+main.section .container.narrow { padding-top: 6px; }
+
+/* === Card grid: centered, never cramped ================================= */
+.card-list{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 16px;
+  justify-content: center;       /* center tracks when fewer columns fit */
+}
+
+/* === Thumb-left cards (Events & Food) — tidy, no overlap =============== */
+.card.thumb-left{
+  display: grid;
+  grid-template-columns: clamp(240px, 38%, 320px) 1fr;
+  gap: 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+@media (max-width: 960px){
+  .card.thumb-left{ grid-template-columns: 1fr; }
+}
+.card.thumb-left .thumb{
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px var(--shadow);
+}
+
+/* Inner layout + spacing */
+.event-card .event-main,
+.place-card .place-main{
+  display: grid;
+  gap: 8px;
+  min-width: 0;                /* prevents text from pushing buttons */
+}
+.event-card .meta,
+.place-card .meta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.event-actions,
+.place-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Links blend in (no harsh blue) */
+#event-list a, #food-list a{
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color .15s ease;
+}
+#event-list a:hover, #food-list a:focus{
+  text-decoration-color: currentColor;
+}
+
+/* Force white hero text (safe, high-specificity) */
+.hero.parallax .hero-inner,
+.hero.parallax .hero-inner * {
+  color: #fff !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
+
+/* Slightly stronger overlay for readability */
+.hero.parallax .hero-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,.28), rgba(0,0,0,.38));
+}
+
+/* Hero text white (only on Events page) */
+.hero-events .hero-inner,
+.hero-events .hero-inner * {
+  color: #fff !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
+.hero-events .hero-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,.28), rgba(0,0,0,.38));
+}
+
+/* Center the Events list as a single comfy column */
+#event-list.events {
+  display: grid;
+  grid-template-columns: 1fr;       /* one column */
+  gap: 16px;
+  max-width: 820px;                 /* same feel as other cards */
+  margin-inline: auto;              /* centered */
+}
+
+/* Keep thumb-left layout tidy inside Events cards */
+#event-list.events .card.thumb-left {
+  grid-template-columns: 320px 1fr; /* image | content */
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+@media (max-width: 960px){
+  #event-list.events .card.thumb-left { grid-template-columns: 1fr; }
+}
+
+/* Spacing so the list doesn't crowd the filters */
+.container.narrow .list-filters { margin: 12px auto 14px; }
+
+
+/* Make multiple switches sit nicely in the filter row */
+.list-filters .switch { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
+.list-filters .switch + .switch { margin-left: 6px; }
+
+
+
+
+
+
+
+/* Events page — venues grid centered & uncluttered */
+#venue-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+#venue-list .venue-card { padding: 12px; }
+#venue-list .venue-card .venue-main { display: grid; gap: 8px; min-width: 0; }
+#venue-list .venue-card .meta { color: var(--muted); font-weight: 600; }
+
+
+
+
+
+
+
+
+/* === Index: make the About cards horizontal (landscape) and tidy ======= */
+#about .card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* wraps nicely */
+  gap: 14px;
+  align-items: start;
+}
+
+#about .card-list .card {
+  display: block;             /* anchor behaves like a card */
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px var(--shadow);
+  overflow: hidden;           /* keeps image corners rounded */
+}
+
+#about .card-list .card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;       /* ⬅️ forces horizontal frame */
+  object-fit: cover;          /* smart-crop inside the frame */
+}
+
+#about .card-list .card .card-body {
+  padding: 10px 12px;         /* breathing room so nothing overlaps */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Header layout so logo + nav are on one line */
+.site-header .container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Logo: put icon next to text */
+.logo{
+  display: inline-flex;             /* ⬅️ keeps icon + text in a row */
+  align-items: center;
+  gap: 10px;
+  line-height: 1;
+  white-space: nowrap;              /* prevent wrapping under the icon */
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: var(--text);
+}
+.logo .accent{ color: var(--accent); }
+
+.logo-mark{
+  flex: 0 0 auto;
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  vertical-align: middle;
+}
+
+/* Small screens: scale down slightly so it never wraps */
+@media (max-width: 520px){
+  .logo { font-size: 1.1rem; }
+  .logo-mark { width: 24px; height: 24px; }
+}
+

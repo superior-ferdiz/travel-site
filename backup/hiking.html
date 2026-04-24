@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <meta name="description" content="Explore hiking, skiing, and camping in Bø, Telemark.">
+  <meta property="og:title" content="Telemark Adventures">
+  <meta property="og:description" content="Trails, slopes, lakes—plan your trip.">
+  <meta property="og:image" content="images/slide1.jpg">
+  <meta name="theme-color" content="#0ea5e9">
+
+
+  <title>Hiking — Telemark Adventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="images/favicon.png">
+
+</head>
+<body class="is-hidden">
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">Telemark<span>Adventures</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="hiking.html">Hiking</a>
+        <a href="skiing.html">Skiing</a>
+        <a href="camping.html">Camping</a>
+        <a href="events.html">Events</a>
+        <a href="food.html">Dining</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero parallax hero-hiking" data-parallax-speed="0.35"
+    style="--bg-image:url('images/hiking.jpg'); background-image:url('images/hiking.jpg'); background-size:cover; background-position:center;">
+    <div class="hero-inner">
+      <h1>Hiking in Telemark</h1>
+      <p>Ridge walks, forest paths, and family-friendly trails.</p>
+    </div>
+  </section>
+
+  <main class="section">
+    <div class="container">
+      <h2>Popular routes</h2>
+      <p>Pick a trail that fits your mood. Difficulty is a gentle guide — always check weather and conditions.</p>
+
+      <div class="card-list" id="popular-routes">
+        <a class="card" href="#trails" data-trail="gygrestolen">
+          <img src="images/Gygrestolen.jpg" alt="Gygrestolen rock formation above Bø">
+          <div class="card-body">
+            <h3>Gygrestolen</h3>
+            <p>~7.3 km · ~600 m · 3–4 h · Steep/rocky sections</p>
+          </div>
+        </a>
+
+        <a class="card" href="#trails" data-trail="tretoppern-jonnbu">
+          <img src="images/anebunattene.jpg" alt="Tretopper’n: Anebunatten, Krintofjellet & Bøkstulnatten">
+          <div class="card-body">
+            <h3>Tretopper’n (Jønnbu)</h3>
+            <p>5.5 km · 175 m · ~2 h · Family-friendly</p>
+          </div>
+        </a>
+
+        <a class="card" href="#trails" data-trail="oysteinnatten">
+          <img src="images/oysteinnhatten.jpg" alt="Øysteinnatten summit on Lifjell">
+          <div class="card-body">
+            <h3>Øysteinnatten (1174 m)</h3>
+            <p>~11.5–12 km · ~530 m · 3–4 h · Summit views</p>
+          </div>
+        </a>
+
+        <a class="card" href="#trails" data-trail="folkestadasane">
+          <img src="images/folkestadaasene.png" alt="Pine forest terrain in Folkestadåsane">
+          <div class="card-body">
+            <h3>Folkestadåsane</h3>
+            <p>~7–8 km · gentle · ~2–2.5 h</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+    <section class="section" id="weather">
+      <div class="container">
+        <h2>Weather in Bø</h2>
+        <!-- Set your location here -->
+        <div id="weather-widget"
+          class="wx"
+          data-lat="59.413"
+          data-lon="9.069"
+          data-timezone="Europe/Oslo">
+        </div>
+      </div>
+    </section>
+
+        <!-- Trail Finder -->
+    <section id="trails" class="section">
+      <div class="container">
+        <h2>Trail finder</h2>
+
+        <form id="trail-filters" class="trail-filters" aria-label="Filter trails">
+          <div class="row">
+            <label>
+              Difficulty
+              <select name="difficulty">
+                <option value="">Any</option>
+                <option value="Easy">Easy</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Hard">Hard</option>
+              </select>
+            </label>
+
+            <label class="range">
+              Max distance
+              <input type="range" id="distRange" name="dist" min="2" max="20" value="12" step="1" />
+              <output id="distOut" for="distRange">≤ 12 km</output>
+            </label>
+
+            <label>
+              Sort by
+              <select name="sort">
+                <option value="rank">Recommended</option>
+                <option value="dist">Shortest first</option>
+                <option value="elev">Most elevation</option>
+                <option value="easy">Easiest</option>
+              </select>
+            </label>
+
+            <button type="button" id="clearFilters" class="btn btn-ghost">Clear</button>
+          </div>
+
+          <fieldset class="features">
+            <legend>Features</legend>
+            <label><input type="checkbox" name="feat" value="lake"> Lake</label>
+            <label><input type="checkbox" name="feat" value="forest"> Forest</label>
+            <label><input type="checkbox" name="feat" value="ridge"> Ridge/views</label>
+            <label><input type="checkbox" name="feat" value="waterfall"> Waterfall</label>
+            <label><input type="checkbox" name="feat" value="family"> Family-friendly</label>
+            <label><input type="checkbox" name="feat" value="summit"> Summit</label>
+          </fieldset>
+        </form>
+
+        <div id="trail-list" class="trail-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Map -->
+    <section id="map" class="section">
+      <div class="container">
+        <h2>Map (Bø i Telemark)</h2>
+        <div class="map-wrap">
+          <iframe
+            title="Map of Bø i Telemark"
+            width="100%" height="380"
+            style="border:0; border-radius:16px"
+            loading="lazy"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=8.75%2C59.20%2C9.35%2C59.55&layer=mapnik&marker=59.413%2C9.069">
+          </iframe>
+          <p class="caption">
+            Tip: zoom the map to find trailheads. For detailed directions, search trail names on your preferred map app.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What to pack -->
+    <section id="packing" class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>What to pack</h2>
+          <ul class="checklist">
+            <li>Layered clothing (weather changes fast)</li>
+            <li>Water & snacks (nuts, fruit, chocolate)</li>
+            <li>Map / offline GPS and a power bank</li>
+            <li>Rain shell and warm hat</li>
+            <li>First-aid mini kit & blister care</li>
+            <li>Headlamp (even in summer, just in case)</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Safety & etiquette</h2>
+          <ul class="checklist">
+            <li>Tell someone your plan & ETA</li>
+            <li>Stay on marked trails; respect signs</li>
+            <li>Leave no trace — pack out all waste</li>
+            <li>Yield to uphill hikers; control dogs</li>
+            <li>Check weather and daylight before you go</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- When to go -->
+    <section id="seasons" class="section">
+      <div class="container card-list seasons">
+        <article class="card">
+          <div class="card-body">
+            <h3>Spring</h3>
+            <p>Snow melts on higher paths; waterfalls are strongest. Trails can be muddy — waterproof boots help.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Summer</h3>
+            <p>Longest days and warm lakes. Popular routes can be busy — start early for quieter trails.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Autumn</h3>
+            <p>Golden forests and crisp air. Pack a warm layer; daylight hours drop quickly.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Telemark Adventures.</p>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+  <script src="js/weather.js"></script>
+  <script src="js/trails.js"></script>
+
+</body>
+</html>

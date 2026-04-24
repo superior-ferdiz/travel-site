@@ -1,0 +1,21 @@
+/* ===== Snow widget ===== */
+.snow { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 12px; box-shadow: 0 10px 30px var(--shadow); }
+.snow h3 { margin: 0 0 8px; font-size: 1rem; color: var(--muted); }
+
+.snow-now { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px; }
+.snow-now .cell { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 8px; text-align: center; font-weight: 700; }
+.snow-now .label { display:block; font-weight: 600; color: var(--muted); }
+
+.snow-bars { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(36px, 1fr); gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+.snow-bar { display: grid; gap: 4px; text-align: center; }
+.snow-bar .col { height: 60px; border-radius: 6px; background: linear-gradient(to top, var(--accent), transparent); box-shadow: 0 6px 18px var(--shadow); }
+.snow-bar .val { font-weight: 700; }
+.snow-bar .t  { color: var(--muted); font-size: .85rem; }
+
+.snow-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+@media (max-width: 900px){ .snow-days { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 600px){ .snow-days { grid-template-columns: repeat(3, 1fr); } }
+.snow-day { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 8px; text-align: center; }
+.snow-day .name { font-weight: 700; margin-bottom: 2px; }
+.snow-day .mm { font-weight: 800; }
+.snow-day .freeze { color: var(--muted); font-size: .9rem; }

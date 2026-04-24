@@ -1,0 +1,95 @@
+/* ===== Weather (shared widgets) ===== */
+.wx { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 16px; box-shadow: 0 10px 30px var(--shadow); }
+.wx-now { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; margin-bottom: 12px; }
+.wx-now .wx-icon { font-size: 2rem; line-height: 1; }
+.wx-now .wx-temp { font-size: clamp(1.75rem, 3.5vw, 2.25rem); font-weight: 800; }
+.wx-now .wx-meta { color: var(--muted); }
+
+.wx-hours { margin-top: 8px; }
+.wx-hours h3, .wx-days h3 { margin: 8px 0 10px; font-size: 1rem; color: var(--muted); }
+.wx-strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(64px, 1fr); gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+.wx-hour { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 8px; text-align: center; }
+.wx-hour .t { font-weight: 700; }
+.wx-hour .i { font-size: 1.25rem; line-height: 1; margin: 2px 0; }
+.wx-hour .v { font-weight: 700; }
+.wx-hour .p { color: var(--muted); font-size: .9rem; }
+
+.wx-days { margin-top: 12px; }
+.wx-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+@media (max-width: 900px){ .wx-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 600px){ .wx-grid { grid-template-columns: repeat(3, 1fr); } }
+.wx-day { background: var(--panel); border: 1px dashed var(--border); border-radius: 10px; padding: 10px; text-align: center; }
+.wx-day .name { font-weight: 700; margin-bottom: 2px; }
+.wx-day .i { font-size: 1.25rem; line-height: 1; margin: 2px 0; }
+.wx-day .temps { display: flex; justify-content: center; gap: 6px; }
+.wx-day .temps .max { font-weight: 800; }
+.wx-day .temps .min { color: var(--muted); }
+.wx-day .precip { color: var(--muted); font-size: .9rem; }
+
+.wx-error { color: #b91c1c; font-weight: 700; }
+
+/* Compact badge (e.g., homepage hero) */
+.wx-badge{ position: absolute; left: 16px; bottom: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(15,23,42,.55); color: #fff; text-decoration: none; font-weight: 700; border: 1px solid var(--border); backdrop-filter: blur(6px); box-shadow: 0 8px 24px var(--shadow-strong); }
+.wx-badge .wxb-icon{ font-size: 1.25rem; line-height: 1; }
+.wx-badge .wxb-temp{ font-size: 1.1rem; }
+.wx-badge .wxb-desc{ font-weight: 600; opacity: .95; }
+.wx-badge:hover{ filter: brightness(1.05); }
+
+/* Ensure it sits above the hero overlay */
+.hero { position: relative; }
+
+
+
+/* Fix weather widget for phones and lesser worthy screens*/
+
+
+/* === Phones: horizontal scrollbars INSIDE the weather card === */
+@media (max-width: 600px) {
+
+  /* Keep the card boxed; contain its rows */
+  #weather .wx, #snow .wx { 
+    position: relative;
+    overflow: hidden;           /* the card stays tidy */
+    border-radius: 16px;
+    max-width: 100%;
+  }
+
+  /* Each row is a viewport (no overflow here…) */
+  #weather .wx-hours, #weather .wx-days,
+  #snow    .wx-hours, #snow    .wx-days {
+    overflow: hidden;
+  }
+
+  /* …the inner strip/grid does the horizontal scrolling */
+  #weather .wx-hours .wx-strip, #snow .wx-hours .wx-strip,
+  #weather .wx-days  .wx-grid,  #snow .wx-days  .wx-grid {
+    display: flex !important;       /* override earlier grid */
+    gap: 10px;
+    overflow-x: auto !important;    /* horizontal scroll lives here */
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 0 2px 12px;            /* room for scrollbar */
+    margin: 0;                      /* do NOT push outside the card */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;          /* Firefox */
+  }
+
+  /* Guarantee there’s enough content width to create a scrollbar */
+  #weather .wx-hour, #snow .wx-hour { flex: 0 0 84px;  }
+  #weather .wx-day,  #snow .wx-day  { flex: 0 0 120px; }
+
+  /* WebKit scrollbar styling (shows on desktop; iOS shows on drag) */
+  #weather .wx-hours .wx-strip::-webkit-scrollbar,
+  #snow    .wx-hours .wx-strip::-webkit-scrollbar,
+  #weather .wx-days  .wx-grid::-webkit-scrollbar,
+  #snow    .wx-days  .wx-grid::-webkit-scrollbar { height: 8px; }
+
+  #weather .wx-hours .wx-strip::-webkit-scrollbar-thumb,
+  #snow    .wx-hours .wx-strip::-webkit-scrollbar-thumb,
+  #weather .wx-days  .wx-grid::-webkit-scrollbar-thumb,
+  #snow    .wx-days  .wx-grid::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 8px;
+  }
+}

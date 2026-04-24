@@ -1,0 +1,75 @@
+/* ===== Contact (scoped) ===== */
+#contact .section-head { text-align: center; }
+#contact .section-head h2 { margin: 0; }
+#contact .section-head .muted { margin: 6px 0 10px; }
+
+#contact .status-bar{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; margin-inline:auto; background: rgba(15,23,42,.06); border:1px solid var(--border); font-weight:700; }
+html[data-theme="dark"] #contact .status-bar{ background:rgba(15,23,42,.25); }
+#contact .status-bar .dot{ width:8px; height:8px; border-radius:999px; background:#10b981; box-shadow:0 0 0 3px rgba(16,185,129,.18); }
+
+#contact .contact-wrap{ display:grid; gap:24px; }
+#contact .contact-row{ width:min(980px, 100%); margin-inline:auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px; }
+
+#contact .info-card{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px; padding:12px 14px; background:var(--panel); border:1px solid var(--border); border-radius:16px; box-shadow:0 8px 24px var(--shadow); }
+#contact .info-card .ico{ width:36px; height:36px; border-radius:999px; display:grid; place-items:center; background:rgba(56,189,248,.18); box-shadow:inset 0 0 0 1px var(--border); font-size:18px; }
+#contact .info-card .label{ font-weight:800; margin-bottom:2px; }
+#contact .info-card .content{ min-width:0; }
+#contact .info-card .content a{ text-decoration:none; }
+#contact .small{ font-size:.9rem; }
+#contact .btn.sm{ padding:7px 10px; border-radius:10px; }
+
+#contact .contact-card{ width:min(720px, 100%); margin-inline:auto; display:grid; gap:12px; background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:16px; box-shadow:0 10px 30px var(--shadow); }
+#contact .contact-card .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:720px){ #contact .contact-card .form-row{ grid-template-columns:1fr; } }
+#contact .contact-card label{ display:grid; gap:6px; font-weight:700; }
+#contact .contact-card input, #contact .contact-card select, #contact .contact-card textarea{ background:var(--panel); color:var(--text); border:1px solid var(--border); border-radius:12px; padding:10px 12px; box-shadow:0 4px 12px var(--shadow); }
+#contact .contact-card input:focus, #contact .contact-card select:focus, #contact .contact-card textarea:focus{ outline:3px solid var(--accent); outline-offset:2px; }
+#contact .contact-card .actions{ display:flex; gap:10px; align-items:center; }
+#contact .map-wrap iframe{ box-shadow:0 10px 30px var(--shadow); border-radius:16px; }
+
+#contact .contact-card input:invalid, #contact .contact-card textarea:invalid{ outline:2px solid transparent; }
+#contact .contact-card.submitted input:invalid, #contact .contact-card.submitted textarea:invalid{ outline-color:#ef4444; }
+
+#contact .contact-card, #contact form.contact-card { max-width: 720px; width: 100%; margin-inline: auto; }
+#contact .contact-wrap { max-width: 980px; margin-inline: auto; }
+#contact .contact-map { margin-top: clamp(24px, 4vw, 44px); }
+#contact .contact-row { margin-bottom: clamp(10px, 2.5vw, 18px); }
+#contact .contact-card { margin-top: clamp(12px, 2.5vw, 20px); }
+
+#contact a { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s ease, color .15s ease, opacity .15s ease; }
+#contact a:hover, #contact a:focus { text-decoration-color: currentColor; }
+
+@media (max-width: 380px){
+  #contact .info-card { grid-template-columns: auto 1fr; grid-auto-rows: auto; }
+  #contact .info-card .btn { grid-column: 1 / -1; justify-self: start; margin-top: 6px; }
+}
+#contact .contact-card .caption { margin-top: 4px; color: var(--muted); }
+
+/* Contact form bug fix, drag out of screen*/
+/* Prevent textarea from breaking the layout */
+#contact .contact-card textarea {
+  resize: vertical;            /* only up/down */
+  min-height: 160px;
+  max-height: 60vh;            /* never grows off-screen */
+}
+
+/* Ensure columns don't overflow */
+#contact .contact-card .form-row > * { min-width: 0; } /* allow flex shrink in grid */
+#contact .contact-card * { box-sizing: border-box; }   /* keep padding within width */
+
+/* 3) Keep the card visually clean and contain outlines */
+#contact .contact-card { overflow: hidden; }           /* hides focus glow spill */
+#contact .contact-card input,
+#contact .contact-card select,
+#contact .contact-card textarea {
+  width: 100%;                                         /* no accidental overflow */
+}
+
+/* Button area: wrap neatly, full-width on small screens */
+#contact .contact-card .actions { flex-wrap: wrap; }
+@media (max-width: 600px) {
+  #contact .contact-card .actions .btn,
+  #contact .contact-card .actions .btn-ghost {
+    width: 100%;
+  }
+}

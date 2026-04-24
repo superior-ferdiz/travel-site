@@ -1,0 +1,14 @@
+/* ===== Gear checklist ===== */
+.gear { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 900px){ .gear { grid-template-columns: 1fr; } }
+.gear-col h3 { margin: 0 0 6px; }
+.gear-col ul { list-style: none; padding: 0; margin: 0; }
+.gear-col li { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; background: var(--panel); box-shadow: 0 4px 12px var(--shadow); }
+.gear-col input[type="checkbox"] { inline-size: 1.05rem; block-size: 1.05rem; margin-right: 8px; }
+.gear-actions { margin-top: 10px; display: flex; gap: 10px; }
+
+@media print {
+  body * { visibility: hidden; }
+  #gear, #gear * { visibility: visible; }
+  #gear { position: absolute; inset: 0 auto auto 0; width: 100%; }
+}

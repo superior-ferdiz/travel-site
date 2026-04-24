@@ -1,0 +1,58 @@
+/* ===== Skiing page ===== */
+.wx--ski { display: grid; gap: 12px; }
+
+/* Night / Lit toggles */
+.toggles { display: flex; align-items: center; gap: 10px; margin: 6px 0 2px; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
+.toggle input { width: 1.05rem; height: 1.05rem; }
+.badge-night { background: #e2e8f0; color: #0f172a; border: 1px solid var(--border); }
+html[data-theme="dark"] .badge-night { background: #1f2937; color: #e5e7eb; }
+.badge-night.is-on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Prices */
+.price-cards { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; }
+@media (max-width: 900px){ .price-cards { grid-template-columns: 1fr; } }
+.price-card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 14px; box-shadow: 0 10px 30px var(--shadow); }
+.price-card h3 { margin: 4px 0 10px; }
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table th, .price-table td { text-align: left; padding: 10px 8px; border-bottom: 1px dashed var(--border); }
+.price-table thead th { color: var(--muted); font-weight: 800; }
+.price-table tbody tr:last-child td { border-bottom: 0; }
+
+/* Visit external sites buttons */
+.btn-link {
+  display: inline-block;
+  padding: 10px 18px;
+  margin-top: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px var(--shadow);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-link:hover {
+  background: var(--accent-600);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px var(--shadow-strong);
+}
+.btn-link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Secondary variant (info links, lighter theme) */
+.btn-link.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  box-shadow: none;
+}
+.btn-link.secondary:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px var(--shadow-strong);
+}

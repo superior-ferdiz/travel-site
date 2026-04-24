@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Events · Telemark Adventures</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="is-hidden">
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">Telemark<span>Adventures</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="hiking.html">Hiking</a>
+        <a href="skiing.html">Skiing</a>
+        <a href="camping.html">Camping</a>
+        <a class="is-active" href="events.html">Events</a>
+        <a href="food.html">Dining</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">Dark mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero parallax hero-events" data-parallax-speed="0.25"
+    style="--bg-image:url('images/kaffekanne.jpg'); background-image:url('images/kaffekanne.jpg'); background-repeat:no-repeat; background-size:cover; background-position:center;">
+    <div class="hero-inner">
+      <h1>Events in Bø</h1>
+      <p class="lead">Kroa i Bø · Bull Inn · local happenings</p>
+    </div>
+    <div class="hero-overlay"></div>
+  </section>
+
+
+  <main class="section">
+    <div class="container narrow">
+      <!-- Hangouts & Venues -->
+      <section id="hangouts" class="section" aria-labelledby="hangouts-title">
+        <div class="container narrow">
+          <h2 id="hangouts-title">Hangouts & Venues</h2>
+          <p class="muted" style="margin:4px 0 12px;">Parks, cinema, bowling, student house — places to meet up.</p>
+          <div id="venue-list" class="card-list"></div>
+        </div>
+      </section>
+
+      <!-- Filters -->
+      <form id="event-filters" class="list-filters" aria-label="Filter events">
+        <input type="search" name="q" placeholder="Search events…" autocomplete="off" />
+        <select name="venue">
+          <option value="">All venues</option>
+          <option>Kroa i Bø</option>
+          <option>Bull Inn</option>
+          <option>Campus/Student</option>
+          <option>Town</option>
+        </select>
+        <select name="when">
+          <option value="upcoming">Upcoming</option>
+          <option value="today">Today</option>
+          <option value="week">This week</option>
+          <option value="all">All (incl. past)</option>
+        </select>
+        <button type="button" id="clearEvents" class="btn btn-ghost">Clear</button>
+      </form>
+
+      <!-- List -->
+      <div id="event-list" class="card-list events" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Telemark Adventures. Built with HTML, CSS, and vanilla JS.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/events.js"></script>
+</body>
+</html>
